@@ -33,11 +33,11 @@ class PortScaner(object):
                     s.settimeout(timeout)
                     result_code = s.connect_ex((ip, port)) #开放放回0
                     if result_code == 0:
-                        #print(OPEN_MSG % port) # print不适合多线程
+                        print(OPEN_MSG % port) # print不适合多线程
                         sys.stdout.write(OPEN_MSG % port)
-                        #result_list.append(port)
-                    #else:
-                      #  sys.stdout.write("% 6d [CLOSED]\n" % port)
+                        result_list.append(port)
+                    else:
+                        sys.stdout.write("% 6d [CLOSED]\n" % port)
                 except Exception as e:
                     print(e)
                 finally:
@@ -86,7 +86,7 @@ def main():
     start_port=int(input("请输入开始扫描的端口号："))
     end_port=int(input("请输入开始结束的端口号："))
     port_list = port_scner.get_port_lists(start_port,end_port,top = top) # 根据参数获取总端口list
-    #print(port_list)
+    print(port_list)
 
     for port in port_list:
         port_queue.put(port)
